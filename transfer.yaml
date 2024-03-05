@@ -4,18 +4,18 @@
   tasks:
   - name: check if disk attachede
     stat:
-      path: /run/media/anar/
+      path: /run/media/anar/media
     register: sym
   
   - name: give error if not attached
-    debug: 
-      msg: "DISK NOT ATTACHED!!! {{sym}}"
+    fail: 
+      msg: "DISK NOT ATTACHED!!! "
     when: sym.stat.exists==False
 
   - name: copy downloaded
-    copy:
-      src: /home/anar/Desktop/downloads
-      dest: /run/media/anar/New\ Volume/
+    command: cp -r /home/anar/Desktop/downloads/  /run/media/anar/media
+       
+    
 
 
     
